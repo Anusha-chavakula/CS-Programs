@@ -1,52 +1,73 @@
 ﻿using System;
-using System.Threading;
 
-namespace MultiThreadingDemo
+namespace Inheritance
 {
-    class ThreadDemo
+    class Shape
     {
-        public void Thread1()
+        protected int width, height;
+        public void area()
         {
-            Console.WriteLine("In thread 1 method");
-            for(int i=0;i<5;i++)
-            {
-                Console.WriteLine("In thread 1,i= " + (i + 1));
-               
-            }
-            Thread.Sleep(1000);
 
-            Console.WriteLine("End of thread1");
         }
-        public void Thread2()
+        public void display()
         {
-            Console.WriteLine("In thread 2 method");
-         
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine("In thread 2,i= " + (i + 1));
-                
-            }
-            Console.WriteLine("End of thread2");
+            Console.WriteLine("In Shape class");
+        }
+    }
+    class Rectangle:Shape
+    {
+ 
+       public  Rectangle(int l,int b)
+        {
+            width = l;
+            height = b;
+        }
+        public void area()
+        {
+            Console.WriteLine("Area of rectangle is "+(width*height));
+        }
+        public void display()
+        {
+            Console.WriteLine("In Rectangle class");
         }
 
 
     }
+    class Triangle : Shape
+    {
+        public Triangle(int w,int b)
+        {
+            width = w;
+            height = b;
+        }
+        public void area()
+        {
+            Console.WriteLine("Area of Triangle is "+(0.5*width * height));
+        }
+        public void display()
+        {
+            Console.WriteLine("In Triangle class");
+        }
+    }
+  
     class Program
     {
         static void Main(string[] args)
         {
-            ThreadDemo t = new ThreadDemo();
-            ThreadStart thread1 = new ThreadStart(t.Thread1);
-            ThreadStart thread2 = new ThreadStart(t.Thread2);
-            Console.WriteLine("In Main thread");
-            Thread child1 = new Thread(thread1);
-            Thread child2 = new Thread(thread2);
-            child1.Start();
-            
-            child2.Start();
-            Console.WriteLine("Current thread is " + Thread.CurrentThread);
-            Console.WriteLine("End of Main");
+            int l, b, w, h;
+            Console.WriteLine("Enter length and breadth of a rectangle");
+            l=Convert.ToInt32(Console.ReadLine());
+            b=Convert.ToInt32(Console.ReadLine());
+            Rectangle r = new Rectangle(l,b);
+            r.display();
+            r.area();
 
+            Console.WriteLine("Enter base and height of a triangle");
+            w = Convert.ToInt32(Console.ReadLine());
+            h = Convert.ToInt32(Console.ReadLine());
+            Triangle t = new Triangle(w, h);
+            t.display();
+            t.area();
         }
     }
 }
